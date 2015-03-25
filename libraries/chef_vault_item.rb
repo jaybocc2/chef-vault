@@ -38,8 +38,12 @@ module ChefVaultItem
 
     begin
       ChefVault::Item.load(bag, item)
-    rescue ChefVault::Exceptions::KeysNotFound, ChefVault::Exceptions::SecretDecryption
-      Chef::DataBagItem.load(bag, item)
+    rescue ChefVault::Exceptions::KeysNotFound, ChefVault::Exceptions::SecretDecryption => exception
+      if node['dev_mode']
+        Chef::DataBagItem.load(bag, item)
+      else
+        raise exception
+      end
     end
   end
 end
