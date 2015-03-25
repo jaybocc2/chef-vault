@@ -47,6 +47,16 @@ not as a fall back to avoid issues loading encrypted items.
   chef-vault gem if required. Default is `~> 2.2`, as that version was
   used for testing.
 
+The following attribute is special and not specifically related to
+this cookbook, but is used in the helper.
+
+* `node['dev_mode']` - If this is true, `chef_vault_item` will attempt
+  to load the specified item as a regular Data Bag Item with
+  `Chef::DataBagItem.load`. This is intended to be used only for
+  testing, and not as a fall back to avoid issues loading encrypted
+  items.
+
+
 ## Resources
 
 ### chef_vault_secret
